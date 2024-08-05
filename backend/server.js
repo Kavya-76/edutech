@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoconnect = require('./db.js');
+const bodyParser = require('body-parser');
+const courseRoute = require('./routes/courseRoute.js')
 const cors = require('cors');
 const PORT = 8000;
 
@@ -10,12 +12,12 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Test route to verify server is running
-app.get('/', (req, res) => {
-  res.send('Server is up and running!');
-});
+// Middleware to parse URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api',courseRoute);
 
 // Start server
 app.listen(PORT, () => {

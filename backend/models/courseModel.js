@@ -1,24 +1,21 @@
 const mongoose = require('mongoose');
-const { description } = require('../schemas/courseSchema');
 
-const coursemongooseschema = mongoose.Schema({
-    tittle: {
-        type: string,
+const courseSchema = new mongoose.Schema({
+    title: {
+        type: String,
         required: true,
     },
     description: {
-        type:string,
+        type: String,
         required: true,
     },
-    courseid: {
-        type: string,
-        unique: true,
-        required: true,
-    },
-    videoid: {
-        type:string
+    videoId: {
+        type: String,
     }
+}, {
+    timestamps: true  // Adds createdAt and updatedAt fields
 });
 
-const course = mongoose.model('Course',coursemongooseschema);
-mod
+
+const course = mongoose.model('Course',courseSchema);
+module.exports = course
